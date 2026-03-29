@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Search | EduTrack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 2rem 1.5rem;
+            color: #0f172a;
+        }
+        .container { max-width: 1280px; margin: 0 auto; }
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            border: 1px solid #eef2f6;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .brand {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        h1 i { color: #3b82f6; }
+        .logout-link {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            padding: 0.6rem 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: 0.2s;
+        }
+        .logout-link:hover {
+            background: #f1f5f9;
+            transform: translateY(-1px);
+        }
+        .logout-link i {
+            color: #ef4444;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .search-form input {
+            flex: 2;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 48px;
+            font-size: 0.9rem;
+        }
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 48px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-primary { background: #0f172a; color: white; }
+        .btn-secondary { background: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+        th { font-weight: 600; color: #334155; }
+        .roll-badge {
+            background: #f1f5f9;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
+        }
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .alert-success { background: #d1fae5; color: #065f46; }
+        .alert-danger { background: #fee2e2; color: #991b1b; }
+        .alert-warning { background: #fed7aa; color: #92400e; }
+        .alert-info { background: #dbeafe; color: #1e40af; }
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="brand">
+            <h1><i class="fas fa-graduation-cap"></i> EduTrack</h1>
+            <a href="{{ url_for('main.logout') }}" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+        <p style="color: #475569;">Search by name, roll number, or father's name</p>
+
+        <form method="get" class="search-form">
+            <input type="text" name="search" placeholder="e.g., John, 101, Kumar" value="{{ query or '' }}">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+            <button type="button" id="clearBtn" class="btn btn-secondary"><i class="fas fa-eraser"></i> Clear</button>
+        </form>
+    </div>
+
+    {% if students %}
+        <div class="card">
+            <h2><i class="fas fa-users"></i> Student Records ({{ students|length }})</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr><th>Roll No</th><th>Full Name</th><th>DOB</th><th>Category</th><th>Percentage</th></tr>
+                    </thead>
+                    <tbody>
+                    {% for s in students %}
+                        <tr>
+                            <td><span class="roll-badge">{{ s.roll_no }}</span></td>
+                            <td><strong>{{ s.name }}</strong></td>
+                            <td>{{ s.dob }}</td>
+                            <td>{{ s.category }}</td>
+                            <td>{{ s.percentage }}%</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% elif query %}
+        <div class="card empty-state">
+            <i class="fas fa-user-slash" style="font-size: 3rem; color: #cbd5e1;"></i>
+            <p style="margin-top: 1rem;">No results found for "<strong>{{ query }}</strong>".</p>
+        </div>
+    {% else %}
+        <div class="card empty-state">
+            <i class="fas fa-chalkboard" style="font-size: 3rem; color: #cbd5e1;"></i>
+            <p style="margin-top: 1rem;">Enter a search term above to find students.</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('clearBtn')?.addEventListener('click', () => {
+        const input = document.querySelector('input[name="search"]');
+        if (input) input.value = '';
+        document.querySelector('.search-form').submit();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <title>EduTrack | Add Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Card styling */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eef2f6;
+            overflow: hidden;
+        }
+
+        .form-header {
+            padding: 1.5rem 2rem 0.5rem 2rem;
+            border-bottom: 1px solid #eef2f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .form-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #0f172a;
+        }
+
+        .form-header h1 i {
+            color: #3b82f6;
+            font-size: 1.5rem;
+        }
+
+        /* Form layout */
+        .form-content {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #475569;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .form-field label i {
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        input, select {
+            padding: 0.7rem 0.9rem;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #ffffff;
+            transition: all 0.2s;
+            font-family: inherit;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+
+        /* Button group */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #0f172a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: #e6edf4;
+            transform: translateY(-1px);
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #eef2f8;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .form-content {
+                padding: 1.5rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="form-header">
+            <h1>
+                <i class="fas fa-user-plus"></i>
+                Add New Student
+            </h1>
+            <!-- Admin dashboard button removed as requested -->
+        </div>
+        <div class="form-content">
+            <form method="post">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label><i class="fas fa-user"></i> First Name *</label>
+                        <input type="text" name="First_Name" required>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-user"></i> Last Name *</label>
+                        <input type="text" name="Last_Name" required>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-user-friends"></i> Father Name *</label>
+                        <input type="text" name="Father_Name" required>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-user-friends"></i> Mother Name</label>
+                        <input type="text" name="Mother_Name">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-calendar-alt"></i> Date of Birth *</label>
+                        <input type="date" name="DOB" required>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-tag"></i> Category</label>
+                        <input type="text" name="Category" placeholder="e.g., General, OBC, SC, ST">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-layer-group"></i> Sub Category</label>
+                        <input type="text" name="SubCategory_Flag" placeholder="Optional">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-pen"></i> Exam</label>
+                        <input type="text" name="Exam" placeholder="e.g., JEE, NEET, CET">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-id-card"></i> Seat No</label>
+                        <input type="text" name="Seat_No">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-chart-line"></i> Percentage *</label>
+                        <input type="number" step="any" name="Percentage" placeholder="e.g., 85.5" required>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-calendar-week"></i> Passing Month Year</label>
+                        <input type="text" name="Passing_Month_Year" placeholder="MM/YYYY">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label><i class="fas fa-fingerprint"></i> ID1</label>
+                        <input type="number" name="ID1">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-fingerprint"></i> ID2</label>
+                        <input type="number" name="ID2">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-fingerprint"></i> ID3</label>
+                        <input type="number" name="ID3">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-star"></i> Score1</label>
+                        <input type="number" name="Score1">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-star"></i> Score2</label>
+                        <input type="number" name="Score2">
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-star"></i> Score3</label>
+                        <input type="number" name="Score3">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Student
+                    </button>
+                    <a href="http://13.200.58.164/admin/dashboard" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #94a3b8;">
+        <i class="fas fa-shield-alt"></i> Secure academic portal · Cloud Admission Hub
+    </div>
+</div>
+</body>
+</html>
