@@ -60,44 +60,39 @@ Admin/Teacher
 - **RDS** provides managed, auto-backup, scalable database.  
 
 ---
-
-## 📁 Project Structure (Clean MVC)
-
 ```
-Student_management/
-student-management-system/
-│
-├── app.py
-├── config.py
-├── requirements.txt
-├── Dump20260327.sql
-│
-├── models/
-│   ├── db.py
-│   └── student.py
-│
-├── routes/
-│   ├── admin_routes.py
-│   ├── main_routes.py
-│   └── student_routes.py
-│
-├── templates/
-│   ├── admin_add.html
-│   ├── admin_dashboard.html
-│   ├── admin_edit.html
-│   ├── admin_login.html
-│   ├── login.html
-│   └── index.html
-│
-├── utils/
-│   └── helpers.py
-│
-├── static/
-│
-├── .gitignore
-└── README.md    
+📁 Project Structure
+📦 Student_management
+└── 📂 student-management-system
+    ├── 📄 app.py               # 🚀 Entry point of Flask app
+    ├── 📄 config.py             # ⚙️ Configuration (DB, secret keys)
+    ├── 📄 requirements.txt     # 📦 Dependencies
+    │
+    ├── 📂 models               # 🗄️ Database layer
+    │   ├── 📄 db.py             # 🔌 DB connection setup
+    │   └── 📄 student.py        # 👨‍🎓 Student CRUD logic
+    │
+    ├── 📂 routes               # 🌐 Application routes
+    │   ├── 📄 admin_routes.py   # 🛠️ Admin operations
+    │   ├── 📄 main_routes.py    # 🏠 General routes
+    │   └── 📄 student_routes.py # 🎯 Student actions
+    │
+    ├── 📂 templates             # 🎨 UI (HTML files)
+    │   ├── 📄 admin_add.html
+    │   ├── 📄 admin_dashboard.html
+    │   ├── 📄 admin_edit.html
+    │   ├── 📄 admin_login.html
+    │   ├── 📄 login.html
+    │   └── 📄 index.html
+    │
+    ├── 📂 utils                 # 🧰 Helper functions
+    │   └── 📄 helpers.py
+    │
+    ├── 📂 static                # 🎨 Static assets (CSS, JS, images)
+    │
+    ├── 📄 .gitignore            # 🚫 Ignored files
+    └── 📄 README.md             # 📘 Documentation
 ```
-
 ---
 
 ## ⚙️ Local Setup (for testing)
